@@ -1,4 +1,4 @@
-Keys:__
+Keys:\
 barrier - B
 start - S
 target - T
