@@ -1,9 +1,9 @@
 import sys
 
-from grid import Grid, GridNode
+from grid.grid import Grid, GridNode
 
 
-class PathFinding:
+class AStarPathfinding:
 
     def __init__(self, grid: Grid, main_window):
         self.grid = grid
@@ -16,7 +16,6 @@ class PathFinding:
         self.closed_list = []
 
     def find_path(self, start_node: GridNode, end_node: GridNode, show_steps: bool):
-
         self.open_list = [start_node]
         self.closed_list = []
 
@@ -111,22 +110,23 @@ class PathFinding:
         return neighbour_list
 
     def calculate_path(self, end_node: GridNode, show_steps: bool) -> list:
-        path = [end_node]
+        # path = [end_node]
         end_node.value = Grid.TARGET
         current_node = end_node.came_from_node
         while current_node.came_from_node is not None:
-            path.append(current_node)
+            # path.append(current_node)
             current_node.value = Grid.PATH
             current_node = current_node.came_from_node
 
             if show_steps:
                 self.main_window.draw()
 
-        path.append(current_node)
+        # path.append(current_node)
 
         # path.reverse()
 
-        return path
+        # return path
+        return []
 
     def calculate_distance_cost(self, grid_node_a: GridNode, grid_node_b: GridNode) -> int:
         x_distance = abs(grid_node_a.x - grid_node_b.x)
