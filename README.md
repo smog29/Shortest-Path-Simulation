@@ -1,4 +1,5 @@
 Keys:\
+change algorithm - A\
 barrier - B\
 empty - E\
 restart - R\
