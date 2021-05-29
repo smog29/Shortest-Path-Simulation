@@ -65,5 +65,6 @@ class GridNodeTest(TestCase):
 
         self.assertTrue(self.grid_node == node)
 
+
 if __name__ == "__main__":
     unittest.main()
