@@ -1,6 +1,13 @@
+
+__author__ = "Jakub Swistak"
+__copyright__ = "Copyright (c) Jakub Swistak"
+__email__ = "kuba175174@gmail.com"
+__version__ = "1.0"
+
+
 import sys
 
-from grid.grid import Grid, GridNode
+from src.grid import Grid, GridNode
 
 
 class DijkstraPathfinding:
@@ -16,6 +23,8 @@ class DijkstraPathfinding:
         self.closed_list = []
 
     def find_path(self, start_node: GridNode, end_node: GridNode, show_steps: bool):
+        """Finds shortest path between two nodes on a grid"""
+
         self.open_list = [start_node]
         self.closed_list = []
 
@@ -32,7 +41,8 @@ class DijkstraPathfinding:
             current_node = self.get_lowest_cost_node(self.open_list)
 
             if current_node == end_node:
-                return self.calculate_path(current_node, show_steps)
+                self.calculate_path(current_node, show_steps)
+                return
 
             self.open_list.remove(current_node)
             self.closed_list.append(current_node)
@@ -64,9 +74,11 @@ class DijkstraPathfinding:
             if show_steps:
                 self.main_window.draw()
 
-        return None
+        return
 
     def get_neighbours(self, current_node: GridNode) -> list:
+        """Returns a list of neighbour nodes and their entering cost from a given node"""
+
         neighbour_list = []
 
         # left side
@@ -111,24 +123,19 @@ class DijkstraPathfinding:
 
         return neighbour_list
 
-    def calculate_path(self, end_node: GridNode, show_steps: bool) -> list:
-        # path = [end_node]
+    def calculate_path(self, end_node: GridNode, show_steps: bool):
+        """Marks the path by checking previous nodes that the ending node came from"""
+
         end_node.value = Grid.TARGET
         current_node = end_node.came_from_node
         while current_node.came_from_node is not None:
-            # path.append(current_node)
             current_node.value = Grid.PATH
             current_node = current_node.came_from_node
 
             if show_steps:
                 self.main_window.draw()
 
-        # path.append(current_node)
-
-        # path.reverse()
-
-        # return path
-        return []
-
     def get_lowest_cost_node(self, node_list) -> GridNode:
+        """Returns a node with lowest f cost"""
+
         return min(node_list, key=lambda node: node.cost)

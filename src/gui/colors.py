@@ -1,3 +1,8 @@
+__author__ = "Jakub Swistak"
+__copyright__ = "Copyright (c) Jakub Swistak"
+__email__ = "kuba175174@gmail.com"
+__version__ = "1.0"
+
 RED = (255, 0, 0)
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)

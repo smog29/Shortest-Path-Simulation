@@ -1,6 +1,10 @@
-import sys
+__author__ = "Jakub Swistak"
+__copyright__ = "Copyright (c) Jakub Swistak"
+__email__ = "kuba175174@gmail.com"
+__version__ = "1.0"
 
-from grid.grid import Grid, GridNode
+import sys
+from src.grid import Grid, GridNode
 
 
 class AStarPathfinding:
@@ -16,6 +20,7 @@ class AStarPathfinding:
         self.closed_list = []
 
     def find_path(self, start_node: GridNode, end_node: GridNode, show_steps: bool):
+        """Finds shortest path between two nodes on a grid"""
         self.open_list = [start_node]
         self.closed_list = []
 
@@ -36,7 +41,8 @@ class AStarPathfinding:
             current_node = self.get_lowest_f_cost_node(self.open_list)
 
             if current_node == end_node:
-                return self.calculate_path(end_node, show_steps)
+                self.calculate_path(end_node, show_steps)
+                return
 
             self.open_list.remove(current_node)
             self.closed_list.append(current_node)
@@ -68,9 +74,11 @@ class AStarPathfinding:
                 self.main_window.draw()
 
         # if while exits the open list is out of nodes - no path exists
-        return None
+        return
 
     def get_neighbours(self, current_node) -> list:
+        """Returns a list of neighbour nodes of a given node"""
+
         neighbour_list = []
 
         # left side
@@ -109,26 +117,21 @@ class AStarPathfinding:
 
         return neighbour_list
 
-    def calculate_path(self, end_node: GridNode, show_steps: bool) -> list:
-        # path = [end_node]
+    def calculate_path(self, end_node: GridNode, show_steps: bool):
+        """Marks the path by checking previous nodes that the ending node came from"""
+
         end_node.value = Grid.TARGET
         current_node = end_node.came_from_node
         while current_node.came_from_node is not None:
-            # path.append(current_node)
             current_node.value = Grid.PATH
             current_node = current_node.came_from_node
 
             if show_steps:
                 self.main_window.draw()
 
-        # path.append(current_node)
-
-        # path.reverse()
-
-        # return path
-        return []
-
     def calculate_distance_cost(self, grid_node_a: GridNode, grid_node_b: GridNode) -> int:
+        """Calculates the estimate distance between two points on a grid and returns it"""
+
         x_distance = abs(grid_node_a.x - grid_node_b.x)
         y_distance = abs(grid_node_a.y - grid_node_b.y)
 
@@ -137,4 +140,5 @@ class AStarPathfinding:
         return self.MOVE_DIAGONAL_COST * min(x_distance, y_distance) + self.MOVE_STRAIGHT_COST * distance
 
     def get_lowest_f_cost_node(self, node_list) -> GridNode:
+        """Returns a node with lowest f cost"""
         return min(node_list, key=lambda node: node.f_cost)
