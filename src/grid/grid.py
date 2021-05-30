@@ -81,6 +81,16 @@ class Grid:
 
         self.cells = []
 
+        self.node_colors = {
+            Grid.EMPTY: colors.WHITE,
+            Grid.BARRIER: colors.BLACK,
+            Grid.TARGET: colors.RED,
+            Grid.START: colors.GREEN,
+            Grid.PATH: colors.PURPLE,
+            Grid.CHECKED: colors.BLUE,
+            Grid.OPEN: colors.ORANGE
+        }
+
         for x in range(width):
             row = []
             for y in range(height):
@@ -97,20 +107,7 @@ class Grid:
                 rect = pygame.Rect(x * self.cell_size, y * self.cell_size,
                                    self.cell_size, self.cell_size)
 
-                if cell.is_empty():
-                    pygame.draw.rect(screen, colors.WHITE, rect)
-                elif cell.is_barrier():
-                    pygame.draw.rect(screen, colors.BLACK, rect)
-                elif cell.is_target():
-                    pygame.draw.rect(screen, colors.RED, rect)
-                elif cell.is_start():
-                    pygame.draw.rect(screen, colors.GREEN, rect)
-                elif cell.is_path():
-                    pygame.draw.rect(screen, colors.PURPLE, rect)
-                elif cell.is_checked():
-                    pygame.draw.rect(screen, colors.BLUE, rect)
-                elif cell.is_open():
-                    pygame.draw.rect(screen, colors.ORANGE, rect)
+                pygame.draw.rect(screen, self.node_colors[cell.value], rect)
 
     def draw_grid(self, screen):
         """Draws grid lines on the screen"""
@@ -150,4 +147,3 @@ class Grid:
             raise IndexError("Wrong Coordinates")
         else:
             return cell
-
