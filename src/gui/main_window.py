@@ -72,6 +72,7 @@ class MainWindow:
             self.draw()
 
     def draw(self):
+        """Draws cells and grid lines on the screen"""
         self.grid.draw_cells(self.screen)
         self.grid.draw_grid(self.screen)
 
@@ -81,6 +82,7 @@ class MainWindow:
         pygame.display.flip()
 
     def draw_text(self):
+        """Views chosen algorithm on the screen"""
         text = self.font.render(self.current_algorithm, True, colors.TEXT_COLOR)
         self.screen.blit(text, (10, 10))
 
@@ -100,6 +102,7 @@ class MainWindow:
                 self.a_star_pathfinding.find_path(self.grid.start_node, self.grid.target_node, False)
 
     def start_path_finding(self):
+        """Starts pathfinding with showing steps"""
         if self.current_algorithm == "AStar":
             self.a_star_pathfinding.find_path(self.grid.start_node, self.grid.target_node, True)
         else:
