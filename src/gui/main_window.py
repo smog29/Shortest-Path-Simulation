@@ -37,7 +37,7 @@ class MainWindow:
 
         self.input = InputManager(self.grid, self)
 
-    def set_window(self):
+    def set_window(self) -> None:
         """Sets and creates window"""
 
         background_colour = colors.WHITE
@@ -47,7 +47,7 @@ class MainWindow:
 
         self.screen.fill(background_colour)
 
-    def start(self):
+    def start(self) -> None:
         """Starts main game loop"""
 
         running = True
@@ -69,7 +69,7 @@ class MainWindow:
 
             self.draw()
 
-    def draw(self):
+    def draw(self) -> None:
         """Draws cells and grid lines on the screen"""
         self.grid.draw_cells(self.screen)
         self.grid.draw_grid(self.screen)
@@ -78,12 +78,12 @@ class MainWindow:
 
         pygame.display.flip()
 
-    def draw_text(self):
+    def draw_text(self) -> None:
         """Views chosen algorithm on the screen"""
         text = self.font.render(self.current_algorithm, True, colors.TEXT_COLOR)
         self.screen.blit(text, (10, 10))
 
-    def change_algorithm(self):
+    def change_algorithm(self) -> None:
         if self.current_algorithm == "AStar":
             self.current_algorithm = "Dijkstra"
 
@@ -97,7 +97,7 @@ class MainWindow:
                 self.grid.clear_pathfinding()
                 self.a_star_pathfinding.find_path(self.grid.start_node, self.grid.target_node, False)
 
-    def start_path_finding(self):
+    def start_path_finding(self) -> None:
         """Starts pathfinding with showing steps"""
         if self.current_algorithm == "AStar":
             self.a_star_pathfinding.find_path(self.grid.start_node, self.grid.target_node, True)

@@ -11,12 +11,12 @@ from src.pathfinding import dijkstra_pathfinding
 import timeit
 
 
-def a_star_path():
+def a_star_path() -> None:
     """Runs a star algorithm without showing any steps"""
     a_star.find_path(grid.start_node, grid.target_node, False)
 
 
-def dijkstra_path():
+def dijkstra_path() -> None:
     """Runs dijkstra algorithm without showing any steps"""
     dijkstra.find_path(grid.start_node, grid.target_node, False)
 

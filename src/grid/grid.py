@@ -55,7 +55,7 @@ class GridNode:
         """Checks if a node is open to be checked by a pathfinding algorithm"""
         return self.value == Grid.OPEN
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, GridNode):
             return self.x == other.x and self.y == other.y
 
@@ -97,7 +97,7 @@ class Grid:
                 row.append(GridNode(0, x, y))
             self.cells.append(row)
 
-    def draw_cells(self, screen):
+    def draw_cells(self, screen) -> None:
         """Draws cells on the screen"""
 
         for cells_list in self.cells:
@@ -106,7 +106,7 @@ class Grid:
                                    self.cell_size, self.cell_size)
                 pygame.draw.rect(screen, self.node_colors[node.value], rect)
 
-    def draw_grid(self, screen):
+    def draw_grid(self, screen) -> None:
         """Draws grid lines on the screen"""
 
         for x in range(self.width):
@@ -118,7 +118,7 @@ class Grid:
                 pygame.draw.line(screen, colors.GREY, (0, y * self.cell_size),
                                  (self.cell_size * self.width, y * self.cell_size))
 
-    def restart(self):
+    def restart(self) -> None:
         """Sets all cells to empty and restarts target and start nodes"""
 
         self.target_node = None
@@ -128,7 +128,7 @@ class Grid:
             for y in range(self.height):
                 self.cells[x][y].value = 0
 
-    def clear_pathfinding(self):
+    def clear_pathfinding(self) -> None:
         """Sets all cells marked by a pathfinding algorithm back to empty"""
 
         for x in range(self.width):

@@ -15,7 +15,7 @@ class InputManager:
 
         self.space_clicked = False
 
-    def check_input(self):
+    def check_input(self) -> None:
         """Checks input from keyboard"""
         keys = pygame.key.get_pressed()
 
@@ -58,7 +58,7 @@ class InputManager:
             self.should_draw_text = False
             self.main_window.start_path_finding()
 
-    def left_mouse_clicked(self):
+    def left_mouse_clicked(self) -> None:
         """Handles left mouse btn clicked"""
 
         x, y = pygame.mouse.get_pos()
@@ -90,7 +90,7 @@ class InputManager:
         else:
             self.main_window.dijkstra_pathfinding.find_path(self.grid.start_node, self.grid.target_node, False)
 
-    def right_mouse_clicked(self):
+    def right_mouse_clicked(self) -> None:
         """Handles right mouse btn clicked"""
 
         x, y = pygame.mouse.get_pos()
