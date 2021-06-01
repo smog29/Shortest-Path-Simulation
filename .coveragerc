@@ -1,0 +1,8 @@
+[run]
+omit =
+    venv/*
+    tests/*
+    src/gui/*
+    src/pathfinding/*
+    src/input/*
+    src/benchmark.py
