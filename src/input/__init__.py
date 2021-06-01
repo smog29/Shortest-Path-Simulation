@@ -1,1 +1,1 @@
-from .inputManager import InputManager
+from .input_manager import InputManager
