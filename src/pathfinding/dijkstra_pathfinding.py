@@ -7,6 +7,8 @@ __version__ = "1.0"
 
 import sys
 
+import pygame
+
 from src.grid import Grid, GridNode
 
 
@@ -38,6 +40,11 @@ class DijkstraPathfinding:
         start_node.cost = 0
 
         while len(self.open_list) > 0:
+            # checking events so pygame can interact with the os
+            if show_steps:
+                pygame.event.get()
+
+            # always checks the nodes with lowest cost from the open list
             current_node = self.get_lowest_cost_node(self.open_list)
 
             if current_node == end_node:
@@ -129,6 +136,10 @@ class DijkstraPathfinding:
         end_node.value = Grid.TARGET
         current_node = end_node.came_from_node
         while current_node.came_from_node is not None:
+            # checking events so pygame can interact with the os
+            if show_steps:
+                pygame.event.get()
+
             current_node.value = Grid.PATH
             current_node = current_node.came_from_node
 
@@ -136,6 +147,6 @@ class DijkstraPathfinding:
                 self.main_window.draw()
 
     def get_lowest_cost_node(self, node_list) -> GridNode:
-        """Returns a node with lowest f cost"""
+        """Returns a node with lowest cost"""
 
         return min(node_list, key=lambda node: node.cost)

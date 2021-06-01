@@ -4,6 +4,9 @@ __email__ = "kuba175174@gmail.com"
 __version__ = "1.0"
 
 import sys
+
+import pygame
+
 from src.grid import Grid, GridNode
 
 
@@ -37,6 +40,10 @@ class AStarPathfinding:
         start_node.calculate_f_cost()
 
         while len(self.open_list) > 0:
+            # checking events so pygame can interact with the os
+            if show_steps:
+                pygame.event.get()
+
             # always checks the nodes with lowest f cost from the open list
             current_node = self.get_lowest_f_cost_node(self.open_list)
 
@@ -123,6 +130,10 @@ class AStarPathfinding:
         end_node.value = Grid.TARGET
         current_node = end_node.came_from_node
         while current_node.came_from_node is not None:
+            # checking events so pygame can interact with the os
+            if show_steps:
+                pygame.event.get()
+
             current_node.value = Grid.PATH
             current_node = current_node.came_from_node
 

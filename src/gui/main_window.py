@@ -18,6 +18,8 @@ class MainWindow:
         pygame.init()
         pygame.font.init()
 
+        pygame.event.set_allowed([pygame.QUIT, pygame.KEYDOWN])
+
         self.WIDTH = 1225
         self.HEIGHT = 945
 
@@ -28,8 +30,6 @@ class MainWindow:
         self.font = pygame.font.Font("freesansbold.ttf", 20)
 
         cell_size = 35
-
-        self.should_draw_text = True
 
         self.grid = Grid(int(self.WIDTH / cell_size), int(self.HEIGHT / cell_size), cell_size)
         self.a_star_pathfinding = pathfinding.AStarPathfinding(self.grid, self)
@@ -47,8 +47,6 @@ class MainWindow:
 
         self.screen.fill(background_colour)
 
-        pygame.display.flip()
-
     def start(self):
         """Starts main game loop"""
 
@@ -58,14 +56,14 @@ class MainWindow:
                 if event.type == pygame.QUIT:
                     running = False
 
-                if pygame.mouse.get_pressed(num_buttons=3)[0]:
-                    self.input.left_mouse_clicked()
-                elif pygame.mouse.get_pressed(num_buttons=3)[2]:
-                    self.input.right_mouse_clicked()
-
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_a:
                         self.change_algorithm()
+
+            if pygame.mouse.get_pressed(num_buttons=3)[0]:
+                self.input.left_mouse_clicked()
+            elif pygame.mouse.get_pressed(num_buttons=3)[2]:
+                self.input.right_mouse_clicked()
 
             self.input.check_input()
 
@@ -76,8 +74,7 @@ class MainWindow:
         self.grid.draw_cells(self.screen)
         self.grid.draw_grid(self.screen)
 
-        if self.should_draw_text:
-            self.draw_text()
+        self.draw_text()
 
         pygame.display.flip()
 
@@ -87,7 +84,6 @@ class MainWindow:
         self.screen.blit(text, (10, 10))
 
     def change_algorithm(self):
-        self.should_draw_text = True
         if self.current_algorithm == "AStar":
             self.current_algorithm = "Dijkstra"
 

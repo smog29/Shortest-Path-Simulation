@@ -100,14 +100,11 @@ class Grid:
     def draw_cells(self, screen):
         """Draws cells on the screen"""
 
-        for x in range(self.width):
-            for y in range(self.height):
-                cell = self.cells[x][y]
-
-                rect = pygame.Rect(x * self.cell_size, y * self.cell_size,
+        for cells_list in self.cells:
+            for node in cells_list:
+                rect = pygame.Rect(node.x * self.cell_size, node.y * self.cell_size,
                                    self.cell_size, self.cell_size)
-
-                pygame.draw.rect(screen, self.node_colors[cell.value], rect)
+                pygame.draw.rect(screen, self.node_colors[node.value], rect)
 
     def draw_grid(self, screen):
         """Draws grid lines on the screen"""
