@@ -1,7 +1,9 @@
-# To start, run the gui/main_window.py file.
+Visualization of the shortest path using A-star and Dijkstra algorithms
+Real-time path generation between two chosen points
+
+To start, run the gui/main_window.py file.
 
 To run a benchmark comparing time of both algorithms, run benchmark.py
-
 
 Keys:\
 change algorithm - A\
